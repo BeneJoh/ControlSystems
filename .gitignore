@@ -1,0 +1,7 @@
+.vscode/*
+.venv/*
+*.png
+plots/*.jpg
+*/__pycache__/*
+
+sessionC.ipynb
