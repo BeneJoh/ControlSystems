@@ -1,6 +1,6 @@
-Dynamical Power Systems Tutorial
+Control Systems Tutorial
 ---
-This repository contains some code snippets for an Introductory tutorial to power system d 
+This repository contains some code snippets for an Introductory tutorial to control systems. 
 You need a working python version on your machine. Moreover, the use of VSCode is recommended.
 
 The following steps should help setting up a working python environment:
