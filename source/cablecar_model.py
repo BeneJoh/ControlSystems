@@ -24,7 +24,7 @@ def cablecar_ode(t, y, u, params):
     return np.array([dphi, domega, dx, dv])
 
 def cablecar_output(t, x, u, params): 
-    return np.array([x[2], x[3]])  # return trolley position and velocity 
+    return np.array([x[0], x[1], x[2], x[3]])  # return trolley position and velocity 
 
 # Two area model
 # class GeneralModel:
