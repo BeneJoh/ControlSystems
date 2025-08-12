@@ -3,5 +3,5 @@
 *.png
 plots/*.jpg
 */__pycache__/*
-
+.conda/
 sessionC.ipynb
