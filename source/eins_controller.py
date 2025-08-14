@@ -85,16 +85,17 @@ def evaluate_step_response(sys,timepts=None, overshoot_tol=DEFAULT_OVERSHOOT):
 
     t,y = ct.step_response(sys,timepts)
     y_final = y[-1]
-    overshoot = (np.max(y) - y_final) / y_final * 100
+    overshoot = (np.max(y) - 1) * 100
     t_overshoot = t[np.argmax(y)]
 
     # Compute bounds for settling time
-    upper_bound = (1 + overshoot_tol) * y_final
-    lower_bound = (1 - overshoot_tol) * y_final
+    upper_bound = 1 + overshoot_tol
+    lower_bound = 1 - overshoot_tol
 
     # Find last time output leaves the bounds
     idx_settle = np.where((y > upper_bound) | (y < lower_bound))[0]
-    settling_time = t[idx_settle[-1] + 1] if len(idx_settle) > 0 else t[-1]
+    last_idx = min(idx_settle[-1] + 1, len(t) - 1)
+    settling_time = t[last_idx]
 
     # --- Plot ---
     plt.figure()
@@ -111,11 +112,18 @@ def evaluate_step_response(sys,timepts=None, overshoot_tol=DEFAULT_OVERSHOOT):
                  arrowprops=dict(arrowstyle="->"))
 
     # Mark settling time
-    plt.axvline(settling_time, color='green', linestyle='--', linewidth=0.8)
-    plt.annotate(f"Settling time: {settling_time:.2f} s",
-                 xy=(settling_time, y_final),
-                 xytext=(settling_time+0.5, y_final-0.1),
-                 arrowprops=dict(arrowstyle="->"))
+    if settling_time == np.max(t):
+        plt.annotate(f"Settling time: Not in simulation time set",
+                    xy=(np.mean(t), y_final*0.1),
+                    xytext=(np.mean(t), y_final*0.1),
+                    ha='center',  # horizontal alignment
+                    va='center')   
+    else:
+        plt.axvline(settling_time, color='green', linestyle='--', linewidth=0.8)
+        plt.annotate(f"Settling time: {settling_time:.2f} s",
+                    xy=(settling_time, y_final),
+                    xytext=(settling_time+0.5, y_final-0.1),
+                    arrowprops=dict(arrowstyle="->"))
 
     plt.title("Step Response Evaluation")
     plt.xlabel("Time [s]")
