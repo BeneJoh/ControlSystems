@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import control as ct
 
 # === Defaults for module ===
-DEFAULT_TIMEPTS = np.linspace(0, 40, 2000)
+DEFAULT_TIMEPTS = np.linspace(0, 50, 2000)
 DEFAULT_POS_TRAJECTORY = np.minimum(DEFAULT_TIMEPTS, 20)
 DEFAULT_OVERSHOOT = 0.05
 DEFAULT_POSITION_SETTLING_ERROR = 0.01  # 1 cm
