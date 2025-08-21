@@ -27,5 +27,5 @@ def cablecar_smallangle_ode(t, y, u, params):
     dphi = omega
     dx = v
     dv =  (F - gammax * v  + M * g * phi + gammaphi * omega/ l ) / ( m )
-    domega =  (-g * (1 - M/m) * phi - gammaphi * omega / l * (1 + M/(l * m)) - (F - v * omega)/ m) / (l)
+    domega =  (-g * (1 + M/m) * phi - gammaphi * omega / (M * l) * (1 - M/m) - (F - v * gammax)/ (m)) / (l)
     return np.array([dphi, domega, dx, dv])
